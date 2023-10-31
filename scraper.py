@@ -1,7 +1,7 @@
 import datetime as _dt
 import json as _json
 
-from typing import Dict
+from typing import Dict, List
 import bs4 as _bs4
 
 import daylightHours as _daylight
@@ -36,7 +36,7 @@ def _scraping_info_forecasts() -> Dict:
         jsonData = "Error"
     return jsonData
 
-def _scraping_info_rainFlag() -> Dict:
+def _scraping_info_rainFlag() -> List:
     tag_id = '#forecast-point-3h-tomorrow'
     url = _generate_rainFlag_url(tag_id)
     response = _urlopen.urlopen(url)
@@ -46,11 +46,15 @@ def _scraping_info_rainFlag() -> Dict:
         # 降水量(3時間ごと 3,6,9,12,15,18,21,24時)
         # id:#forecast-point-3h-tomorrow, 子要素class:precipitation, 子要素td
         elements = soup.select(f'{tag_id} > .precipitation > td')
-        rainFlag = dict()
+        rainFlag = []
         for i, element in enumerate(elements):
-            time_3h = 0+3*i
             j = int(element.text.strip())
-            rainFlag[time_3h] = 1 if j >=2 else 0
+            rainFlag.append(0 if j <2 else 0)
+        # rainFlag = dict()
+        # for i, element in enumerate(elements):
+        #     time_3h = 0+3*i
+        #     j = int(element.text.strip())
+        #     rainFlag[time_3h] = 0 if j <2 else 0
     else:
         rainFlag = "Error"
 
