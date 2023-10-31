@@ -14,13 +14,24 @@ def _generate_forecasts_url(area: str) -> str:
 def _generate_rainFlag_url(tag_id: str) -> str:
     url = f"https://tenki.jp/forecast/6/29/6110/26213/3hours.html{tag_id}"
     return url
+def _edit_json_contents(json_data: _json) -> Dict:
+    contents = dict()
+
+    contents["date"] = json_data["date"] #日付
+    contents["weather"] = json_data['image']["title"] # 天気
+    contents["weatherURL"] = json_data['image']["url"] # 天気画像
+    contents["weatherDetail"] = json_data["detail"]['weather'] #天気詳細
+    contents["maxTemp"] = json_data['temperature']["max"]['celsius'] # 最高気温
+    contents["minTemp"] = json_data['temperature']["min"]['celsius'] # 最高気温
+    return contents
 
 def _scraping_info_forecasts() -> Dict:
     area = "260020" # 詳細の予報エリア番号 - 舞鶴観測所
     url = _generate_forecasts_url(area)
     response = _urlopen.urlopen(url)
     if ('forecasts' in response.json())==True:
-        jsonData = response.json()['forecasts'][1]
+        # jsonData = response.json()['forecasts'][1]
+        jsonData = _edit_json_contents(response.json()['forecasts'][1])
     else:
         jsonData = "Error"
     return jsonData
