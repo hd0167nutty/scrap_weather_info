@@ -1,1 +1,1 @@
-{"forecasts": {"date": "2023-11-08", "weather": "晴れ", "weatherURL": "https://www.jma.go.jp/bosai/forecast/img/100.svg", "weatherDetail": "晴れ", "maxTemp": "19", "minTemp": "12"}, "rainFlag": [0, 0, 0, 0, 0, 0, 0, 0], "daylightHours": 10.5}
+{"forecasts": {"date": "2023-11-13", "weather": "雨のち曇", "weatherURL": "https://www.jma.go.jp/bosai/forecast/img/313.svg", "weatherDetail": "雨　夕方　から　くもり　所により　夕方　まで　雷　を伴う", "maxTemp": "12", "minTemp": "6"}, "rainFlag": [0, 0, 0, 0, 0, 0, 0, 0], "daylightHours": 10.4}
